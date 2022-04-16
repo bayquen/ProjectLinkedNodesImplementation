@@ -6,6 +6,7 @@ public class LinkedFrontBackCappedList<T> implements FrontBackCappedListInterfac
 	private int numberOfEntries;
    
   //OUR METHODS HERE BELOW...
+  
 
 	public LinkedFrontBackCappedList(int capacity) {
 		if (!initialized) {
