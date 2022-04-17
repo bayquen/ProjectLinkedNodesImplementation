@@ -19,20 +19,27 @@ public class LinkedFrontBackCappedList<T> implements FrontBackCappedListInterfac
 	@Override
 	public String toString() {
 		if (head != null) {
-		Node currentNode = head;
-		String aString = "[";
-
-		while (currentNode.next != null) {
-			currentNode = currentNode.next;
-			aString += " " + currentNode.getData();
+			Node currentNode = head;
+			T lastEntry = getEntry(numberOfEntries);
+			String aString = "[";
+			int counter = 0;
+			while (currentNode != null) {
+				if (counter!=numberOfEntries-1) {
+					aString += currentNode.getData() + ", ";
+				}
+				else{
+					aString += currentNode.getData();
+					tail = currentNode;
+				}
+				counter+=1;
+				currentNode = currentNode.next;
 			}
 
-		aString += "]";
-		return "Size: " + numberOfEntries + "; " +
-			"capacity = " + capacity + "; " + aString;
+			aString += "]";
+			return aString +" size="+size()+" capacity="+capacity+" head="+ head.data+ " tail=" + tail.data;
 		}
 		else {
-			return "[] " + "size = " + numberOfEntries + " capacity = " + capacity;
+			return "[]";
 		}
 	}
   
@@ -51,9 +58,28 @@ public class LinkedFrontBackCappedList<T> implements FrontBackCappedListInterfac
 		return numberOfEntries;
 	}
 
-	public T getEntry(int someIntHere) {
-		return null;
+	@Override
+	public T getEntry(int givenPosition) {
+		Node currentNode = head;
+		if (givenPosition==0)
+		{return currentNode.data;}
+		else if (givenPosition >= 1 && givenPosition <= numberOfEntries)
+		{
+		for (int counter = 0; counter < givenPosition; counter++)
+		{
+			currentNode = currentNode.next;
+		}
+		if (currentNode !=null)
+		{
+		return currentNode.data;}
+		else{
+			return null;
+		}
+		}
+		else {return null;}
 	}
+
+  
 
 	public void clear() {
 		T[] tempList = (T[]) new Comparable[capacity+1];
@@ -63,12 +89,42 @@ public class LinkedFrontBackCappedList<T> implements FrontBackCappedListInterfac
 	}
 
 	public boolean addFront(T anItem) {
+		Node new_node = new Node(anItem);
+		if (isEmpty()) {
+		head =new_node;
+		numberOfEntries++;
+		return true;
+		}
+		else if(numberOfEntries!=capacity) {
+			new_node.next = head;
+			head = new_node;
+			numberOfEntries++;
+			return true;
+		}
 		return false;
 	}
+  
 	public boolean addBack(T anItem) {
+		if (isEmpty())
+		{
+			Node new_node = new Node(anItem);
+			head=new_node;
+		numberOfEntries++;
+		return true;
+		}
+		else if (numberOfEntries!=capacity){
+			Node temp = head;
+			while (temp.next != null) {
+				temp = temp.next;
+			}
+
+			temp.next = new Node(anItem,null);
+			numberOfEntries++;
+			return true;
+		}
 		return false;
 	}
-
+  
 	public T removeFront() {
 		String strg = "placeholder hehe";
 		return (T) strg;
@@ -79,9 +135,21 @@ public class LinkedFrontBackCappedList<T> implements FrontBackCappedListInterfac
 		return (T) strg;
 	}
 
-	public boolean contains(T someObjectHere) {
-		return false;
+	@Override
+	public boolean contains(T anEntry) {
+		boolean found = false;
+		Node currentNode = head;
+
+		while (!found && (currentNode != null)) {
+			if (anEntry.equals(currentNode.data)) {
+				found = true;
+			} else {
+				currentNode = currentNode.next;
+			}
+		}
+		return found;
 	}
+
 
 	public int indexOf(T someObjectHere) {
 		return 0;
