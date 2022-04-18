@@ -24,22 +24,22 @@ public class LinkedFrontBackCappedList<T> implements FrontBackCappedListInterfac
 			String aString = "[";
 			int counter = 0;
 			while (currentNode != null) {
-				if (counter!=numberOfEntries-1) {
+				if (counter != numberOfEntries - 1) {
 					aString += currentNode.getData() + ", ";
 				}
 				else{
 					aString += currentNode.getData();
 					tail = currentNode;
 				}
-				counter+=1;
+				counter += 1;
 				currentNode = currentNode.next;
 			}
 
 			aString += "]";
-			return aString +" size="+size()+" capacity="+capacity+" head="+ head.data+ " tail=" + tail.data;
+			return aString + " size=" + size() + " capacity=" + capacity + " head=" + head.data + " tail=" + tail.data;
 		}
 		else {
-			return "[]";
+			return "[]" + " size=" + size() + " capacity=" + capacity;
 		}
 	}
   
