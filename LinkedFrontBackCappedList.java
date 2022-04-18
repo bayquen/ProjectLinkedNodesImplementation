@@ -79,8 +79,6 @@ public class LinkedFrontBackCappedList<T> implements FrontBackCappedListInterfac
 		else {return null;}
 	}
 
-  
-
 	public void clear() {
 		T[] tempList = (T[]) new Comparable[capacity+1];
 		head = null;
@@ -95,6 +93,7 @@ public class LinkedFrontBackCappedList<T> implements FrontBackCappedListInterfac
 		numberOfEntries++;
 		return true;
 		}
+      
 		else if(numberOfEntries!=capacity) {
 			new_node.next = head;
 			head = new_node;
