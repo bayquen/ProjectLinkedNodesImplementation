@@ -89,12 +89,12 @@ public class LinkedFrontBackCappedList<T> implements FrontBackCappedListInterfac
 	public boolean addFront(T anItem) {
 		Node new_node = new Node(anItem);
 		if (isEmpty()) {
-		head =new_node;
+		head = new_node;
 		numberOfEntries++;
 		return true;
 		}
       
-		else if(numberOfEntries!=capacity) {
+		else if (numberOfEntries!=capacity) {
 			new_node.next = head;
 			head = new_node;
 			numberOfEntries++;
@@ -106,12 +106,12 @@ public class LinkedFrontBackCappedList<T> implements FrontBackCappedListInterfac
 	public boolean addBack(T anItem) {
 		if (isEmpty())
 		{
-			Node new_node = new Node(anItem);
-			head=new_node;
+			Node new_node = new Node (anItem);
+			head = new_node;
 		numberOfEntries++;
 		return true;
 		}
-		else if (numberOfEntries!=capacity){
+		else if (numberOfEntries != capacity){
 			Node temp = head;
 			while (temp.next != null) {
 				temp = temp.next;
